@@ -22,7 +22,7 @@ from huggingface_hub import hf_hub_download
 from open_clip import create_model_and_transforms, get_tokenizer
 from open_clip.factory import HF_HUB_PREFIX, _MODEL_CONFIGS
 
-
+REAL_NAME = {'Brain': 'Brain', 'Liver':'Liver', 'Retina_RESC':'retinal OCT', 'Chest':'Chest X-ray film', 'Retina_OCT2017':'retinal OCT', 'Histopathology':'histopathological image'}
 # -------------------------------------------------------------------------
 # 1. Constants
 
