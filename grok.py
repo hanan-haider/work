@@ -25,11 +25,11 @@ from open_clip.factory import HF_HUB_PREFIX, _MODEL_CONFIGS
 
 # -------------------------------------------------------------------------
 # 1. Constants
-# -------------------------------------------------------------------------
-CLASS_NAMES = ['Liver']                     # extend if you have more objects
-CLASS_INDEX = {'Liver': 1}                  # >0 → segmentation masks exist
+
+# Biomed datasets indexing (you can keep as is if relevant for your task)
+CLASS_INDEX = {'Brain': 3, 'Liver': 2, 'Retina_RESC': 1, 'Retina_OCT2017': -1, 'Chest': -2, 'Histopathology': -3}
+CLASS_NAMES = {'Brain': 3, 'Liver': 2, 'Retina_RESC': 1, 'Retina_OCT2017': -1, 'Chest': -2, 'Histopathology': -3}
 CLASS_INDEX_INV = {v: k for k, v in CLASS_INDEX.items()}
-REAL_NAME = {1: 'liver'}                    # human-readable name for prompts
 
 
 # -------------------------------------------------------------------------
