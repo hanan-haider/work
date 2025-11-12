@@ -143,17 +143,21 @@ class MedTestDataset(Dataset):
     def __getitem__(self, idx):
         x_path, y_label, mask_path = self.x[idx], self.y[idx], self.mask[idx]
         x = Image.open(x_path).convert('RGB')
+        x_img = self.transform_x(x).float()
         x_img = self.transform_x(x)
 
         if self.seg_flag <= 0:
             # segmentation not available
-            return x_img, y_label, torch.zeros([1, self.resize, self.resize], dtype=torch.uint8)
+            return x_img, torch.tensor(y, dtype=torch.float32), torch.zeros([1, self.resize, self.resize], dtype=torch.float32)
 
         if mask_path is None:
-            mask = torch.zeros([1, self.resize, self.resize], dtype=torch.uint8)
-            y = 0
+            mask = torch.zeros([1, self.resize, self.resize], dtype=torch.float32)
+            y = torch.tensor(0.0, dtype=torch.float32)
+        
         else:
             mask = Image.open(mask_path).convert('L')
+            mask = self.transform_mask(mask).float()
+            y = torch.tensor(1.0, dtype=torch.float32)
             mask = self.transform_mask(mask)
             y = 1
         return x_img, y, mask
